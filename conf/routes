@@ -1,0 +1,4 @@
+GET		/		Tags.index
+POST		/		Tags.save
+
+GET     /public/                                staticDir:public

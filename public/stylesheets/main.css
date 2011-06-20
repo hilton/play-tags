@@ -1,0 +1,5 @@
+body { font: 16px "Helvetica Neue" sans-serif; }
+h1 { font-size: 120%; color: #900; }
+h2 { font-size: 100%; }
+.odd { background-color:#eef;}
+.hasError { background-color:#fcc;}

@@ -1,0 +1,76 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h1>cache</h1>
+
+<p>
+#{cache 'date', for:'3s'}
+   ${new java.util.Date()}
+#{/cache}
+</p>
+
+<h1>error</h1>
+
+<p>a: #{error 'a'/}</p>
+<p>b: #{error 'a', field:'b'/}</p>
+
+<h1>errors, else</h1>
+
+#{errors}
+	<p>${error}</p>
+#{/errors}
+#{else}
+	<p>No validation errors</p>
+#{/else}
+
+<h2>Error table</h2>
+
+<table>
+<tr><th>#</th><th>Error</th></tr>
+#{errors}
+	<tr class="${error_parity}"><td>${error_index}</td><td>${error}</td></tr>
+#{/errors}
+</table>
+
+<h2>Error paragraph</h2>
+<p>
+#{errors}
+	${error_isFirst ? 'Errors: ' : ''}
+	<span class="${error_parity}">${error_index}: ${error}.</span>
+#{/errors}
+</p>
+
+<h2>error_isLast</h2>
+
+#{errors}
+	<p>${error} (${error_isFirst}, ${error_isLast})</p>
+#{/errors}
+
+
+<h1>form, authenticityToken</h1>
+
+#{form @save()}
+<p>a: <input name="a" value="${a}" class="${errors.forKey('a') ? 'hasError' : ''}"></p>
+<p>b: <input name="b" value="${b}" class="#{errorClass 'b'/}"></p>
+<p>#{authenticityToken /}<input type="submit"/></p>
+#{/form}
+
+
+<h1>verbatim</h1>
+
+<p>
+${'&amp;'}
+<br/>${'&amp;'.raw()}
+<br/>#{verbatim}${'&amp;'}#{/verbatim}
+</p>
+
+${html}
+#{set tag:'<blink>' /}
+<p>
+#{verbatim}
+	${html}
+	${tag}
+#{/verbatim}
+</p>
+
+
